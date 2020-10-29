@@ -121,7 +121,11 @@ def concatenate(paths_list, destination_path):
     global_df.to_csv(destination_path)
 
 def simple_concatenate(source_path_1, source_path_2, destination_path):
-    df_1 = pd.read_csv(source_path_1)
-    df_2 = pd.read_csv(source_path_2)
+    df_1 = pd.read_csv(source_path_1, low_memory=False)
+    print('taille de df 1 : ', len(df_1))
+    df_2 = pd.read_csv(source_path_2, low_memory=False)
+    print('taille de df 2 : ', len(df_2))
     df_global = pd.concat([df_1, df_2],ignore_index=True)
-    df_global.to_scv(destination_path)
+    print('taille de df concat : ', len(df_global))
+
+    df_global.to_csv(destination_path)
